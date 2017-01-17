@@ -1,7 +1,7 @@
 /*
- Name: Assignment2.c
- Author: Joshua Scott
- Description: A program that can count (sum, difference, product, division and power).
+ Name: 			Assignment2.c
+ Author: 		Joshua Scott and Robin Jacobs (1503969 and 1503968)
+ Description: 	A program that can count (sum, difference, product, division and power).
  */
 
 #include<stdio.h>
@@ -26,6 +26,4 @@ int main (void)
 	printf("Product:\t%d\n", firstNumber * secondNumber);
 	printf("Division:\t%d\n", firstNumber / secondNumber);
 	printf("Power:\t\t%.0f\n", pow(firstNumber, secondNumber));
-
-	return 0;
 }
