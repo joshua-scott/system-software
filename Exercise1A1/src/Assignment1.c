@@ -1,7 +1,7 @@
 /*
- Name: 			Assignment1.c
- Author:		Joshua Scott and Robin Jacobs (1503969 and 1503968)
- Description: 	Prints out basic information about each group member
+ Name: 			Exercise1, Assignment1.c
+ Author: 		Joshua Scott and Robin Jacobs
+ Description: 	Prints basic information about both group members.
  */
 
 #include<stdio.h>
@@ -13,9 +13,9 @@ int main (void)
 			"First name:\t\t\tJoshua\n"
 			"Student number:\t\t\t1503969\n"
 			"Programming experience:\t\tC#, C (basics only)\n"
-			"Motivation to learn C:\t\tHIGH\n"
+			"Motivation to learn C:\t\tHigh\n"
 			"Grade I am at:\t\t\t1 (but, soon 5!)\n"
-			"My plan to achieve that grade:\tPractise programming on a daily basis!");
+			"My plan to achieve that grade:\tPractise programming on a daily basis!\n\n");
 
 	// Group member 2:
 	printf("Last Name: Jacobs\n"
