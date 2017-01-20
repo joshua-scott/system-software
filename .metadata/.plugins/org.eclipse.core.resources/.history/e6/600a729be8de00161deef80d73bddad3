@@ -16,7 +16,7 @@
 // Prototype functions
 void countEvenNumbers(int maximumNumber);
 void printEveryThirdNumberDescending(int maximumNumber);
-int checkDivisibility(int dividend, int divisor);
+void checkDivisibility(int dividend, int divisor);
 int isTribonacci(int toCheck);
 
 int main (void)
@@ -71,18 +71,12 @@ void printEveryThirdNumberDescending(int maximumNumber)
 	printf("\n");
 }
 
-int checkDivisibility(int dividend, int divisor)
+void checkDivisibility(int dividend, int divisor)
 {
 	if (dividend % divisor == 0)
-	{
 		printf("\tYes, %d is perfectly divisible by %d\n", dividend, divisor);
-		return 1;
-	}
 	else
-	{
 		printf("\tNo, %d is not perfectly divisible by %d\n", dividend, divisor);
-		return 0;
-	}
 }
 
 int isTribonacci(int toCheck)

@@ -1,4 +1,4 @@
-09:37:56 **** Rebuild of configuration Debug for project Exercise2 ****
+10:15:32 **** Incremental Build of configuration Debug for project Exercise2 ****
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Assignment1.o" "..\\src\\Assignment1.c" 
 gcc -o Exercise2.exe "src\\Assignment1.o" 
