@@ -1,5 +1,5 @@
-10:15:32 **** Incremental Build of configuration Debug for project Exercise2 ****
+15:41:18 **** Incremental Build of configuration Debug for project Exercise3 ****
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Assignment1.o" "..\\src\\Assignment1.c" 
-gcc -o Exercise2.exe "src\\Assignment1.o" 
-Info: Nothing to build for Exercise2
+gcc -o Exercise3.exe "src\\Assignment1.o" 
+Info: Nothing to build for Exercise3
