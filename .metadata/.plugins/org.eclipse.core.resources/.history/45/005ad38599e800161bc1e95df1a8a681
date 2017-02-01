@@ -57,6 +57,9 @@ int main (void)
     Has a simple autogenerate feature for faster testing. */
 void addIntsToArray(int array[], int length, int autoGenerate)
 {
+	// Avoids a bug with Eclipse and scanf()
+
+
     for (int i = 0; i < length; i++)
     {
         if (autoGenerate)
@@ -64,7 +67,6 @@ void addIntsToArray(int array[], int length, int autoGenerate)
         else
         {
             printf("Enter value at index %d: ", i);
-            // fflush avoids a bug with Eclipse and scanf()
             fflush(stdout);
             scanf("%d", &array[i]);
         }

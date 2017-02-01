@@ -21,6 +21,9 @@ int checkIfTribonacci(int toCheck);
 
 int main (void)
 {
+    // Avoids a bug with Eclipse and scanf()
+    fflush(stdout);
+
     int arrayOfTenInts[10];
     // Let's use the standard way of getting an array's length in C:
     const int lengthOfArray = sizeof(arrayOfTenInts) / sizeof(arrayOfTenInts[0]);
@@ -64,8 +67,6 @@ void addIntsToArray(int array[], int length, int autoGenerate)
         else
         {
             printf("Enter value at index %d: ", i);
-            // fflush avoids a bug with Eclipse and scanf()
-            fflush(stdout);
             scanf("%d", &array[i]);
         }
     }
