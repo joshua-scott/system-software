@@ -1,0 +1,84 @@
+/*
+ Name: 			Exercise4, Assignment1.c
+ Author: 		Joshua Scott
+ Task description:
+1. Create an array of 10 elements (random integer numbers between 0-1000) in main function.
+	Create a function and inside the function you print out the value and memory location of each element of that array.
+	Use pointers. Remember to pass the pointer and the array size to the function as arguments.
+	Do not pass the array as argument.
+	Do not create an array inside the function.
+	Why do you need to pass the array size as argument?
+2. Create a function and inside the function create an array of characters, each character of your names shall be in the array.
+	Create another array of pointers, whose type is char. Initialize each pointer to NULL.
+	In one loop, set each pointer to point to one character in the other array.
+	So in pointer array location [0] there is a char pointer that points to character array location [0] etc.
+	In another loop, print out the value and memory location of each character twice (once by handling the character array directly
+		and once by using the pointer array).
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Prototypes
+void printArrayInfo(int *arrayFirstElement, int arraySize);
+void createArrayOfChars();
+
+int main (void)
+{
+    // Seed for RNG
+    srand(time(NULL));
+
+    // TASK 1:
+    // Array of 10 random ints from 0-1000
+    int array10Ints[10];
+    for (int i = 0; i < 10; i++)
+        array10Ints[i] = rand() % 1000;
+
+    // Get pointer to the first element
+    int* pointerToFirstElement = &array10Ints[0];
+    // Pass the pointer and arraySize so it can be printed
+    printArrayInfo(pointerToFirstElement, 10);
+
+    // TASK 2:
+    createArrayOfChars();
+}
+
+/* Prints the index/value/address of elements in an array of ints. */
+void printArrayInfo(int *arrayFirstElement, int arraySize)
+{
+    for (int i = 0; i < arraySize; i++)
+    {
+        printf("Index:\t%d\n", i);
+        printf("Value:\t%d\n", *arrayFirstElement);
+        printf("Address:%p\n", arrayFirstElement);
+        arrayFirstElement++;
+    }
+}
+
+void createArrayOfChars()
+{
+    char ourNames[] = { 'J', 'O', 'S', 'H', 'R', 'O', 'B', 'I', 'N' };
+
+    for (int i = 0; i < 9; i++)
+        printf("%c\n", ourNames[i]);
+
+        char *pointers[9];
+        for (int i = 0; i < 9; i++)
+            pointers[i] = NULL;
+
+        for (int i = 0; i < 9; i++)
+            printf("Address:%p\n", pointers[i]);
+
+        for (int i = 0; i < 9; i++)
+            pointers[i] = &ourNames[i];
+
+        for (int i = 0; i < 9; i++)
+            printf("Address:%p\n", pointers[i]);
+
+        for (int i = 0; i < 9; i++)
+        {
+            printf("Value: %c in memory location %p\n", *pointers[i], pointers[i]);
+            printf("Value: %c in memory location %p\n", ourNames[i], &ourNames[i]);
+        }
+}
