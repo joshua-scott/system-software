@@ -38,3 +38,6 @@ gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Assignment1.o" "..\\src\\Assign
 ..\src\Assignment1.c:84:20: error: 'struct Node' has no member named 'data'
    printf("%d ",temp->data);
                     ^
+
+19:16:07 Build Finished (took 212ms)
+
