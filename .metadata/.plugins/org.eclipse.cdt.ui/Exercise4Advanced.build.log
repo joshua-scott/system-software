@@ -1,43 +1,12 @@
-19:16:07 **** Rebuild of configuration Debug for project Exercise4Advanced ****
+12:25:53 **** Incremental Build of configuration Debug for project Exercise4Advanced ****
 Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\test.o" "..\\src\\test.c" 
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Assignment1.o" "..\\src\\Assignment1.c" 
-..\src\Assignment1.c: In function 'GetNewNode':
-..\src\Assignment1.c:41:16: error: assignment to expression with array type
-  newNode->name = name;
-                ^
-..\src\Assignment1.c:42:26: error: assignment to expression with array type
-  newNode->chemicalSymbol = chemicalSymbol;
-                          ^
-..\src\Assignment1.c: In function 'InsertAtHead':
-..\src\Assignment1.c:54:36: warning: passing argument 1 of 'GetNewNode' makes pointer from integer without a cast [-Wint-conversion]
-  struct Node* newNode = GetNewNode(x);
-                                    ^
-..\src\Assignment1.c:36:14: note: expected 'char **' but argument is of type 'int'
- struct Node* GetNewNode(char* name[NAME_LENGTH], char* chemicalSymbol[2],
-              ^
-..\src\Assignment1.c:54:25: error: too few arguments to function 'GetNewNode'
-  struct Node* newNode = GetNewNode(x);
-                         ^
-..\src\Assignment1.c:36:14: note: declared here
- struct Node* GetNewNode(char* name[NAME_LENGTH], char* chemicalSymbol[2],
-              ^
-..\src\Assignment1.c: In function 'InsertAtTail':
-..\src\Assignment1.c:68:36: warning: passing argument 1 of 'GetNewNode' makes pointer from integer without a cast [-Wint-conversion]
-  struct Node* newNode = GetNewNode(x);
-                                    ^
-..\src\Assignment1.c:36:14: note: expected 'char **' but argument is of type 'int'
- struct Node* GetNewNode(char* name[NAME_LENGTH], char* chemicalSymbol[2],
-              ^
-..\src\Assignment1.c:68:25: error: too few arguments to function 'GetNewNode'
-  struct Node* newNode = GetNewNode(x);
-                         ^
-..\src\Assignment1.c:36:14: note: declared here
- struct Node* GetNewNode(char* name[NAME_LENGTH], char* chemicalSymbol[2],
-              ^
-..\src\Assignment1.c: In function 'Print':
-..\src\Assignment1.c:84:20: error: 'struct Node' has no member named 'data'
-   printf("%d ",temp->data);
-                    ^
+gcc -o Exercise4Advanced.exe "src\\Assignment1.o" "src\\test.o" 
+src\test.o: In function `main':
+C:\Users\Joshua\Documents\GitHub\system-software\Exercise4Advanced\Debug/../src/test.c:27: multiple definition of `main'
+src\Assignment1.o:C:\Users\Joshua\Documents\GitHub\system-software\Exercise4Advanced\Debug/../src/Assignment1.c:117: first defined here
+collect2.exe: error: ld returned 1 exit status
 
-19:16:07 Build Finished (took 212ms)
+12:25:53 Build Finished (took 452ms)
 

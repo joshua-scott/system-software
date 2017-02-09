@@ -1,0 +1,6 @@
+#ifndef ODDEVEN_H
+#define ODDEVEN_H
+
+void isOddOrEven(int number);
+
+#endif

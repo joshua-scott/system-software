@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include"Tribonacci.h"
+
+/*  Checks if a given int is in the Tribonacci sequence. */
+void checkIfTribonacci(int toCheck);
+{
+    // Edge case
+    if (toCheck == 0)
+		return 1;
+
+	// The first three Tribonacci numbers
+	int first = 0;
+	int second = 0;
+	int third = 1;
+
+	// Adds the preceding three numbers to find the next number in sequence. Checks for equality.
+	while (third < toCheck)
+	{
+		int willBecomeThird = first + second + third;
+		if (willBecomeThird == toCheck)
+			return 1;
+		first = second;
+		second = third;
+		third = willBecomeThird;
+	}
+}

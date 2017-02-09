@@ -1,1 +1,7 @@
-Info: Nothing to build for Exercise1B
+12:23:10 **** Incremental Build of configuration Debug for project Exercise1B ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Assignment2.o" "..\\src\\Assignment2.c" 
+gcc -o Exercise1B.exe "src\\Assignment2.o" 
+
+12:23:11 Build Finished (took 285ms)
+
