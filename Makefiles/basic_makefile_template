@@ -1,0 +1,52 @@
+#
+# This is an example Makefile for a countwords program.  This
+# program uses both the scanner module and a counter module.
+# Typing 'make' or 'make modular' will create the executable file.
+#
+
+# define some Makefile variables for the compiler and compiler flags
+# to use Makefile variables later in the Makefile: $()
+#
+#  -g    adds debugging information to the executable file
+#  -Wall turns on most, but not all, compiler warnings
+#
+# for C++ define  CC = g++
+CC = gcc
+CFLAGS  = -g -Wall
+
+# typing 'make' will invoke the first target entry in the file 
+# (in this case the default target entry)
+# you can name this target entry anything, but "default" or "all"
+# are the most commonly used names by convention
+#
+default: modular
+
+# To create the executable file count we need the object files
+#
+modular: Assignment1.o  OddEven.o Prime.o Tribonacci.o 
+	$(CC) $(CFLAGS) -o modular Assignment1.o OddEven.o Prime.o Tribonacci.o 
+
+# To create the object file OddEven.o, we need the source
+# files OddEven.c and OddEven.h
+#
+OddEven.o:  OddEven.c OddEven.h
+	$(CC) $(CFLAGS) -c OddEven.c
+
+# To create the object file Prime.o, we need the source
+# files Prime.c and Prime.h:
+#
+Prime.o:  Prime.c Prime.h 
+	$(CC) $(CFLAGS) -c Prime.c
+
+# To create the object file Tribannaci.o, we need the source 
+# files Tribonacci.c and Tribonacci.h:
+#
+Tribonacci.o:  Tribonacci.c Tribonacci.h 
+	$(CC) $(CFLAGS) -c Tribonacci.c
+
+# To start over from scratch, type 'make clean'.  This
+# removes the executable file, as well as old .o object
+# files and *~ backup files:
+#
+clean: 
+	$(RM) modular *.o *~
