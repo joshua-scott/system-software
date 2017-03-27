@@ -68,7 +68,7 @@ void printBinaryAsHex (char* binary)
 	printf("%X\n", num);
 }
 
-// Check each byte is really 8 bits, by looping through argv
+// Loop through each argument to check it's really binary
 int checkArgsAreBinary(char* argv[], int numberOfArgsToWrite)
 {
 	// Inter-argument loop
