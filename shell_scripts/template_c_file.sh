@@ -1,3 +1,4 @@
 #!/bin/bash
 set -x
-ls -l
+read -p "Enter filename: " $filename
+touch "$filename"
