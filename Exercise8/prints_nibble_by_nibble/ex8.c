@@ -20,16 +20,10 @@ int main (int argc, char *argv[])
 		int numberOfArgsToWrite = argc - 1;
 		
 		if(checkArgsAreBinary(argv, numberOfArgsToWrite))
-		{
-			// Save arguments to file
 			saveToFile(argv, numberOfArgsToWrite);
-		}
 		else
-		{
 			printf("Error: check all arguments are bytes written in binary form.\n");
-		}
 	}
-
 	return 0;
 }
 
@@ -40,15 +34,25 @@ void displayFileData()
 	file = fopen("binary", "r");
 
 	char lineBuffer[256] = "";
-
 	int line = 1;
-	//read from file
+
+	// Read file line-by-line
 	while (fgets(lineBuffer, sizeof(lineBuffer), file))
 	{
-		// Print data as line, binary, hex
-		// Last char of lineBuffer is '\n' so no need for newline below
-		printf("\nLine %i:\nBinary: %sHex: ", line, lineBuffer);
-		printBinaryAsHex(lineBuffer);
+		printf("\nLine %i:\n", line);
+
+		// Every time we pass a nibble, print that nibble
+		for (int currentBit = 0; lineBuffer[currentBit] != '\n'; currentBit++)
+		{
+			char previousNibble[4];
+			if (currentBit % 4 == 0 && currentBit != 0)
+			{
+				for (int i = 4; i > 0; i--)
+					previousNibble[4 - i] = lineBuffer[currentBit - i];
+				printf("Binary: %s\tHex: ", previousNibble);
+				printBinaryAsHex(previousNibble);
+			}
+		}
 
 		line++;
 	}
@@ -68,7 +72,7 @@ void printBinaryAsHex (char* binary)
 	printf("%X\n", num);
 }
 
-// Loop through each argument to check it's really binary
+// Loop through argv to check each argument is only 1s and 0s
 int checkArgsAreBinary(char* argv[], int numberOfArgsToWrite)
 {
 	// Inter-argument loop
@@ -77,7 +81,7 @@ int checkArgsAreBinary(char* argv[], int numberOfArgsToWrite)
 		// Intra-argument loop
 		for (int currentChar = 0; argv[currentByte][currentChar] != '\0'; currentChar++)
 		{
-			// If the argument contains a non-binary character, display error
+			// If the argument contains a non-binary character, return 'false'
 			if (!(argv[currentByte][currentChar] == '1' || argv[currentByte][currentChar] == '0'))
 				return 0;
 		}
