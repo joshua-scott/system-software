@@ -9,7 +9,7 @@
 CC = gcc
 
 # define any compile-time flags
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -g -pedantic -std=c11
 
 # define any directories containing header files other than /usr/include
 INCLUDES = -I/home/joshua/include  -I../include

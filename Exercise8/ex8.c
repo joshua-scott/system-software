@@ -1,7 +1,16 @@
+/*
+ Name: 			Exercise8Basic, ex8.c
+ Author: 		Joshua Scott, Robin Jacobs
+ Description:
+ A command line program that takes one or more binary arguments and writes them to
+ a file 'binary.txt'. If no arguments are passed, it displays the binary and hex values
+ that are present in the file.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
-void displayFileData();
+int displayFileData();
 int checkArgsAreBinary(char* argv[], int numberOfArgsToWrite);
 void saveToFile(char *argv[], int numberOfArgsToWrite);
 void printBinaryAsHex(char* binary);
@@ -20,40 +29,49 @@ int main (int argc, char *argv[])
 		int numberOfArgsToWrite = argc - 1;
 		
 		if(checkArgsAreBinary(argv, numberOfArgsToWrite))
-		{
-			// Save arguments to file
 			saveToFile(argv, numberOfArgsToWrite);
-		}
 		else
-		{
 			printf("Error: check all arguments are bytes written in binary form.\n");
-		}
 	}
-
 	return 0;
 }
 
-void displayFileData()
+int displayFileData()
 {
 	// Open file for reading
 	FILE *file;
-	file = fopen("binary", "r");
+	if (!(file = fopen("binary.txt", "r")))
+	{
+		printf("Error: File 'binary.txt' cannot be read, does it exist?\n");
+		return 0;
+	}
 
 	char lineBuffer[256] = "";
-
 	int line = 1;
-	//read from file
+
+	// Read file line-by-line
 	while (fgets(lineBuffer, sizeof(lineBuffer), file))
 	{
-		// Print data as line, binary, hex
-		// Last char of lineBuffer is '\n' so no need for newline below
-		printf("\nLine %i:\nBinary: %sHex: ", line, lineBuffer);
-		printBinaryAsHex(lineBuffer);
+		printf("\nLine %i:\n", line);
+
+		// Every time we pass a nibble, print that nibble
+		for (int currentBit = 0; lineBuffer[currentBit - 1] != '\n'; currentBit++)
+		{
+			char previousNibble[4];
+			if (currentBit % 4 == 0 && currentBit != 0)
+			{
+				for (int i = 4; i > 0; i--)
+					previousNibble[4 - i] = lineBuffer[currentBit - i];
+				printf("Binary: %s\tHex: ", previousNibble);
+				printBinaryAsHex(previousNibble);
+			}
+		}
 
 		line++;
 	}
 
 	fclose(file);
+	return 1;
 }
 
 void printBinaryAsHex (char* binary)
@@ -68,7 +86,7 @@ void printBinaryAsHex (char* binary)
 	printf("%X\n", num);
 }
 
-// Check each byte is really 8 bits, by looping through argv
+// Loop through argv to check each argument is only 1s and 0s
 int checkArgsAreBinary(char* argv[], int numberOfArgsToWrite)
 {
 	// Inter-argument loop
@@ -77,7 +95,7 @@ int checkArgsAreBinary(char* argv[], int numberOfArgsToWrite)
 		// Intra-argument loop
 		for (int currentChar = 0; argv[currentByte][currentChar] != '\0'; currentChar++)
 		{
-			// If the argument contains a non-binary character, display error
+			// If the argument contains a non-binary character, return 'false'
 			if (!(argv[currentByte][currentChar] == '1' || argv[currentByte][currentChar] == '0'))
 				return 0;
 		}
@@ -89,7 +107,7 @@ void saveToFile(char* argv[], int numberOfArgsToWrite)
 {
 	// Open file in a+ mode (append to EOF, create file if it doesn't exist)
 	FILE *file;
-	file = fopen("binary", "a+");
+	file = fopen("binary.txt", "a+");
 	
 	// To store the string we will write to file
 	char writeBuffer[256] = "";
@@ -120,3 +138,4 @@ void saveToFile(char* argv[], int numberOfArgsToWrite)
 	}
 	fclose(file);
 }
+
