@@ -74,6 +74,23 @@ int displayFileData()
 	return 1;
 }
 
+/*
+ * Prints a binary input as Hex.
+ * All except the last line of this function is to convert the binary to an int.
+ * The '%X' on the last line just formats an int to its hex value.
+ *
+ * The conversion from binary to int happens like this:
+ * 		int b is either 1 or 0, the same as the current input char (the first, then the second, then the third.. until the end).
+ *		the bits that represent the int num get shifted one place to the left. This has the effect of doubling the value of num.
+ * 			e.g. if num is '11' in binary which is '3' in decimal, it shifts to  '110' = '6'. 
+ *			or, if num is '1010' which is 10, it becomes '10100' which is 20.
+ *		that explains the code "num = (num<<1)"
+ * 		but the full line is "num = (num<<1)|b", what does the "|b" bit do?
+ * 		that's the bitwise inclusive OR operator. 
+ *		Since b is only 1 bit (1 or 0), it basically says 'if b is 1, add 1 to num'. But it's doing this by directly affecting the rightmost bit of num, based on b.
+ *		The overall effect is that on each loop, num will definitely double, and it may or may not also increase by 1...
+ *		This process continues until we've reached the end of the binary input.
+ */
 void printBinaryAsHex (char* binary)
 {
 	char *a = binary;
