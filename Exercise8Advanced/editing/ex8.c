@@ -39,9 +39,16 @@ int main (int argc, char** argv)
 
 void encrypt(char* filename, char* password){
 	printf("encrypt\n");
-	
+	// open the file
+	// write the password to the last line
+	// encrypt the whole file
+	// display a confirmation message
 }
 
 void decrypt(char* filename, char* password){
 	printf("decrypt\n");
+	// open the last line of the file only
+	// check the XOR'd password input matches the last line
+	// if it does, delete the last line and then decrypt
+	// if not, don't edit anything and return an error
 }
