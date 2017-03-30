@@ -10,6 +10,7 @@
 
 void encrypt(char* filename, char* password);
 void decrypt(char* filename, char* password);
+char* lineEncrypt(char* lineBuffer);
 
 int main (int argc, char** argv)
 {
@@ -24,7 +25,6 @@ int main (int argc, char** argv)
 	char* password = argv[3]; 
 
 	switch (selectedMode){
-
 		case 'e':
 			encrypt(filename, password);
 			break;
@@ -38,15 +38,49 @@ int main (int argc, char** argv)
 }
 
 void encrypt(char* filename, char* password){
-	printf("encrypt\n");
+	printf("Encrypting...\n");
 	// open the file
 	// write the password to the last line
 	// encrypt the whole file
 	// display a confirmation message
+
+	// try to open the file
+	FILE *file;
+	if (!(file = fopen(filename, "w")))
+	{
+		printf("Error: Check file '%s' exists and you have write permissions.\n", filename);
+	}
+	// if file exists, read the data line-by-line, encrypt, write back
+	else
+	{
+		char lineBuffer[256] = "";
+		int line = 1;
+
+		// read file line-by-line
+		while (fgets(lineBuffer, sizeof(lineBuffer), file))
+		{
+			// encrypt it and re-write the encrypted version
+			char* postEncrypted = lineEncrypt(lineBuffer);
+			
+
+			//OVERWRITE LINE HERE SOMEHOW
+
+
+			line++;
+		}
+
+		// write ENCRYPTED password to the last line
+		fprintf(file, "%s", password);
+	}
+}
+
+char* lineEncrypt(char* lineBuffer)
+{
+	// XOR THE INPUT AND RETURN
 }
 
 void decrypt(char* filename, char* password){
-	printf("decrypt\n");
+	printf("Decrypting...\n");
 	// open the last line of the file only
 	// check the XOR'd password input matches the last line
 	// if it does, delete the last line and then decrypt
