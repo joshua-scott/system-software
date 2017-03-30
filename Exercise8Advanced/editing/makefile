@@ -15,7 +15,7 @@ CFLAGS =  -Wall -Wextra -pedantic -std=c11 -g
 INCLUDES = 
 
 # define the C source files
-SRCS = advanced.c
+SRCS = ex8.c
 
 # define the C object files 
 #
