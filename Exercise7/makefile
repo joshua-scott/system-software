@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -g -pedantic -std=c11
 INCLUDES = -I/home/joshua/include  -I../include
 
 # define the C source files
-SRCS = Assignment1.c OddEven.c Prime.c Tribonacci.c
+SRCS = ex7.c OddEven.c Prime.c Tribonacci.c
 
 # define the C object files 
 #

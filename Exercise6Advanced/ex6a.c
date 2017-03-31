@@ -1,14 +1,12 @@
 /*
- Name: 			Exercise6Advanced, Assignment1.c
- Author: 		Joshua Scott
- Description:
- A command line program that takes one or more arguments and creates an acronym.
- Any uppercase letters will go into the acronym, lowercase letters will not.
- A warning will be given if there are any non-alpha characters.
- Acronyms will be appended to the file 'output.c'
-*/
-
-// QUESTION: IS 'argv[currentWord][currentLetter]' error-proof? if the array is guaranteed to be contiguous, I guess so?
+ * Name: 		Exercise6Advanced, ex6a.c
+ * Author: 		Joshua Scott
+ * Description:
+ *      - A command line program that takes one or more arguments and creates an acronym.
+ *      - Any uppercase letters will go into the acronym, lowercase letters will not.
+ *      - A warning will be given if there are any non-alpha characters.
+ *      - Acronyms will be appended to the file 'output.c'
+ */
 
 #include <stdio.h>
 #include <ctype.h>

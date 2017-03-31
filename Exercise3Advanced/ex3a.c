@@ -1,11 +1,11 @@
 /*
- Name: 			Exercise3Advanced, Assignment1.c
- Author: 		Joshua Scott
- Description:
-				1. generates 100 random numbers and places them in a multidimensional array (10 by 10 array)
-                2. counts the average of each row and column and prints them either on screen or into a file
-                3. sorts the numbers in ascending order and prints the array elements on screen as a 10 by 10 matrix
-                4. finds all prime numbers from the array and prints them on the screen
+ * Name: 		Exercise3Advanced, ex3a.c
+ * Author: 		Joshua Scott
+ * Description:
+ *		1. generates 100 random numbers and places them in a multidimensional array (10 by 10 array)
+ *		2. counts the average of each row and column and prints them either on screen or into a file
+ *		3. sorts the numbers in ascending order and prints the array elements on screen as a 10 by 10 matrix
+ *		4. finds all prime numbers from the array and prints them on the screen
  */
 
 #define ROW 10

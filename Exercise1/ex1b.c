@@ -1,11 +1,11 @@
 /*
- Name: 			Exercise1, Assignment2.c
- Author: 		Joshua Scott and Robin Jacobs
- Description: 	A program to calculate sum, difference, product, division and power.
+ * Name: 			Exercise1, ex1b.c
+ * Author: 			Joshua Scott, Robin Jacobs
+ * Description: 	A program to calculate sum, difference, product, division and power.
  */
 
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 
 int main (void)
 {

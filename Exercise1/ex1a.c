@@ -1,10 +1,10 @@
 /*
- Name: 			Exercise1, Assignment1.c
- Author: 		Joshua Scott and Robin Jacobs
- Description: 	Prints basic information about both group members.
+ * Name: 			Exercise1A, ex1a.c
+ * Author: 			Joshua Scott, Robin Jacobs
+ * Description: 	Prints basic information about both group members.
  */
 
-#include<stdio.h>
+#include <stdio.h>
 
 int main (void)
 {

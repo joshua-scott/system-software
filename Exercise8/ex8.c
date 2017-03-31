@@ -1,11 +1,11 @@
 /*
- Name: 			Exercise8Basic, ex8.c
- Author: 		Joshua Scott, Robin Jacobs
- Description:
- A command line program that takes one or more binary arguments and writes them to
- a file 'binary.txt'. If no arguments are passed, it displays the binary and hex values
- that are present in the file.
-*/
+ * Name: 		Exercise8Basic, ex8.c
+ * Author: 		Joshua Scott, Robin Jacobs
+ * Description:
+ * 		A command line program that takes one or more binary arguments and writes them to
+ * 		a file 'binary.txt'. If no arguments are passed, it displays the binary and hex values
+ * 		that are present in the file.
+ */
 
 #include <stdio.h>
 #include <stdlib.h>

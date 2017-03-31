@@ -1,19 +1,18 @@
 /*
- Name: 			Exercise2, Assignment1.c
- Author: 		Joshua Scott
- Description: 	A program that:
- 	 	 	 	 	1. Counts the sum of even numbers between 0 - 1000.
-					2. Prints out every third number between 1000 - 0.
-					3. Creates a random number (uses time as seed) and then tells if it is divisible by 2, 3, 5 and 10.
-					4. Explains why a computer generated random number is never really random.
-					5. Checks if the random number is a number in the Tribonacci sequence.
+ * Name: 			Exercise2, ex2.c
+ * Author: 			Joshua Scott
+ * Description: 	A program that:
+ *			1. Counts the sum of even numbers between 0 - 1000.
+ *			2. Prints out every third number between 1000 - 0.
+ *			3. Creates a random number (uses time as seed) and then tells if it is divisible by 2, 3, 5 and 10.
+ *			4. Explains why a computer generated random number is never really random.
+ *			5. Checks if the random number is a number in the Tribonacci sequence.
  */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-// Prototype functions
 void countEvenNumbers(int maximumNumber);
 void printEveryThirdNumberDescending(int maximumNumber);
 int checkDivisibility(int dividend, int divisor);

@@ -1,26 +1,27 @@
 /*
- Name: 			Exercise4, Assignment1.c
- Author: 		Joshua Scott
- Task description:
-1. Create an array of 10 elements (random integer numbers between 0-1000) in main function.
-	Create a function and inside the function you print out the value and memory location of each element of that array.
-	Use pointers. Remember to pass the pointer and the array size to the function as arguments.
-	Do not pass the array as argument.
-	Do not create an array inside the function.
-	Why do you need to pass the array size as argument?
-2. Create a function and inside the function create an array of characters, each character of your names shall be in the array.
-	Create another array of pointers, whose type is char. Initialize each pointer to NULL.
-	In one loop, set each pointer to point to one character in the other array.
-	So in pointer array location [0] there is a char pointer that points to character array location [0] etc.
-	In another loop, print out the value and memory location of each character twice (once by handling the character array directly
-		and once by using the pointer array).
+ *  Name: 			Exercise4, ex4.c
+ *  Author: 		Joshua Scott
+ *  Task description:
+ * 1. 
+ *  - Create an array of 10 elements (random integer numbers between 0-1000) in main function.
+ *  - Create a function and inside the function you print out the value and memory location of each element of that array.
+ *  - Use pointers. Remember to pass the pointer and the array size to the function as arguments.
+ *  - Do not pass the array as argument.
+ *  - Do not create an array inside the function.
+ *  - Why do you need to pass the array size as argument?
+ * 2. 
+ *  - Create a function and inside the function create an array of characters, each character of your names shall be in the array.
+ * 	- Create another array of pointers, whose type is char. Initialize each pointer to NULL.
+ * 	- In one loop, set each pointer to point to one character in the other array.
+ * 	- So in pointer array location [0] there is a char pointer that points to character array location [0] etc.
+ * 	- In another loop, print out the value and memory location of each character twice (once by handling the character array directly
+ * 		and once by using the pointer array).
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-// Prototypes
 void printArrayInfo(int *arrayFirstElement, int arraySize);
 void task2();
 
@@ -39,7 +40,6 @@ int main (void)
     int* pointerToFirstElement = &array10Ints[0];
     // Pass the pointer with arraySize so it can be printed
     printArrayInfo(pointerToFirstElement, 10);
-
 
     // TASK 2:
     task2();

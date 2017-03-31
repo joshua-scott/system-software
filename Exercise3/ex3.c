@@ -1,11 +1,11 @@
 /*
- Name: 			Exercise3, Assignment1.c
- Author: 		Joshua Scott
- Description:
- 	 	 	 	1. asks user to give 10 integer numbers and places them in an array
-				2. counts the average of the numbers and prints it on screen
-				3. sorts the numbers in ascending order and prints the array elements on screen
-				4. checks if the average (that is type casted to integer) is a prime number and is a number in Tribonacci sequence.
+ * Name: 		Exercise3, ex3.c
+ * Author: 		Joshua Scott
+ * Description:
+ *		1. asks user to give 10 integer numbers and places them in an array
+ *		2. counts the average of the numbers and prints it on screen
+ *		3. sorts the numbers in ascending order and prints the array elements on screen
+ *		4. checks if the average (that is type casted to integer) is a prime number and is a number in Tribonacci sequence.
  */
 
 #include <stdio.h>
@@ -53,7 +53,7 @@ int main (void)
 }
 
 /*  Gets input from the user and adds integers to an array.
-    Does not check for errors.
+    Does not check for input errors.
     Has a simple autogenerate feature for faster testing. */
 void addIntsToArray(int array[], int length, int autoGenerate)
 {

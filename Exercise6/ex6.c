@@ -1,10 +1,10 @@
 /*
- Name: 			Exercise6Basic, Assignment1.c
- Author: 		Joshua Scott
- Description:
- A command line program that takes one or more arguments and creates an acronym.
- Any uppercase letters will go into the acronym, lowercase letters will not.
-*/
+ * Name: 		Exercise6, ex6.c
+ * Author: 		Joshua Scott
+ * Description:
+ *    A command line program that takes one or more arguments and creates an acronym.
+ *    Any uppercase letters will go into the acronym, lowercase letters will not.
+ */
 
 #include <stdio.h>
 #include <ctype.h>
