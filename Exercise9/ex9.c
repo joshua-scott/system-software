@@ -1,13 +1,4 @@
-/* play is called where the game logic is stored (calls most/all other functions)
- * player is greeted
- * ask for player's guess
- * generate computer guess
- * check them against each other to see who won that round
- * add a point to the winner
- * tell the user who won that round
- * if someone has 2 points, declare the winner and ask if they want to play again or quit
-*/
-
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,28 +6,35 @@
 
 void play();
 char initRound();
-char* generateGuess();
-char determineRoundResult(char* guess, char* cpuGuess);
+char* generateChoice();
+char determineRoundResult(char* playerChoice, char* cpuChoice);
+char parseInput(int confirmOnQuit);
 void printOutcome(int outcome);
 void printScore(int playerWins, int cpuWins);
+void quit(int requireConfirm);
 void showAbout();
 void showHelp();
 
 int main (void)
 {
-	play();
+	srand(time(NULL));
+	printf("Welcome to Rock Paper Scissors Lizard Spock!\n");
+	printf("At any time, you can type 'a' for about, 'q' to quit, or 'h' for help. Good luck!\n");
+
+	while (1) {
+		play();
+		printf("Press Enter to play again, or 'q' to quit. ");
+		parseInput(0);
+	}
 }
 
 void play()
 {
-	printf("Welcome to Rock Paper Scissors Lizards Spock!\n");
-	printf("At any time, you can type 'a' for about, or 'h' for help. Good luck!\n");
-
 	int playerWins = 0,
 		cpuWins = 0;
 
 	// play rounds until there's a winner
-	while (playerWins + cpuWins < 3) {
+	while (playerWins < 2 && cpuWins < 2) {
 		char roundResult = initRound();
 
 		if (roundResult == 'p') {
@@ -45,189 +43,200 @@ void play()
 			printScore(playerWins, cpuWins);
 		}
 		else if (roundResult == 'c') {
-			printf("you lost that round :(\n");
+			printf("you lost that round.\n");
 			cpuWins++;
 			printScore(playerWins, cpuWins);
 		}
-		else {
+		else if (roundResult == 'd') {
 			printf("That round was a draw, let's play it again...\n");
+		}
+		else {
+			printf("Error at play(), exiting...\n");
+			exit(-1);
 		}
 	}
 	
 	if (playerWins > 1)
-		printf("Congratulations, you won Rock Paper Scissors Lizards Spock!\n");
+		printf("\nCongratulations, you won Rock Paper Scissors Lizard Spock!\n");
 	else
-		printf("Unlucky, you lose :(\n");
+		printf("\nUnlucky, you lost :(\n");
 }
 
 char initRound()
 {
-	printf("Enter Rock(1), Paper(2), Scissors(3), Lizard(4), or Spock(5): ");
+	char response = ' ';
 
-	char input = getchar();
-	char* guess = malloc(9 * sizeof(char));
+	do {
+		printf("\nEnter Rock(1), Paper(2), Scissors(3), Lizard(4), or Spock(5): ");
+		response = parseInput(1);
+	} while (response < '1' || response > '5');
 
-	switch (input){
+	char* playerChoice = malloc(10 * sizeof(char));
+
+	switch (response){
 		case '1':
-			guess = "rock"; break;
+			playerChoice = "Rock"; break;
 		case '2':
-			guess = "paper"; break;
+			playerChoice = "Paper"; break;
 		case '3':
-			guess = "scissors"; break;
+			playerChoice = "Scissors"; break;
 		case '4':
-			guess = "lizard"; break;
+			playerChoice = "Lizard"; break;
 		case '5':
-			guess = "spock"; break;
-		case 'a':
-			showAbout();
-			initRound(); break;
-		case 'h':
-			showHelp();
-			initRound(); break;
+			playerChoice = "Spock"; break;
 		default:
-			printf("That's not a valid guess, let's try again...\n");
-			initRound(); break;
+			printf("Error at initRound(), exiting...\n");
+			exit(-1);
 	}
 
-	printf("You guessed %s. ", guess);
-
-	return determineRoundResult(guess, generateGuess());
+	printf("You chose %s. ", playerChoice);
+	return determineRoundResult(playerChoice, generateChoice());
 }
 
-char* generateGuess()
+char* generateChoice()
 {
-	// generate ascii value from 49 to 53, which is char '1' to '5'
-	srand(time(NULL));
 	int random = rand() % 5;
 
-	char* cpuGuess = malloc(9 * sizeof(char));
+	char* cpuChoice = malloc(9 * sizeof(char));
 
 	switch (random){
 		case 0:
-			cpuGuess = "rock"; break;
+			cpuChoice = "Rock"; break;
 		case 1:
-			cpuGuess = "paper"; break;
+			cpuChoice = "Paper"; break;
 		case 2:
-			cpuGuess = "scissors"; break;
+			cpuChoice = "Scissors"; break;
 		case 3:
-			cpuGuess = "lizard"; break;
+			cpuChoice = "Lizard"; break;
 		case 4:
-			cpuGuess = "spock"; break;
+			cpuChoice = "Spock"; break;
 	}
 
-	printf("Your opponent guessed %s.\n", cpuGuess);
-	return cpuGuess;
+	printf("Your opponent chose %s.\n", cpuChoice);
+	return cpuChoice;
 }
 
-char determineRoundResult(char* guess, char* cpuGuess)
+char determineRoundResult(char* playerChoice, char* cpuChoice)
 {
-	if (guess == cpuGuess) {
-		return 'd';
+	char result = ' ';
+	if (strcmp(playerChoice, cpuChoice) == 0) {
+		result = 'd';
 	}
-	if (strcmp(guess, "rock") == 0) {
-		if (strcmp(cpuGuess, "paper") == 0) {
-			printOutcome(1); return 'c';
+	else if (strcmp(playerChoice, "Rock") == 0) {
+		if (strcmp(cpuChoice, "Paper") == 0) {
+			printOutcome(1); 
+			result = 'c';
 		}
-		if (strcmp(cpuGuess, "scissors") == 0) {
-			printOutcome(9); return 'p';
+		else if (strcmp(cpuChoice, "Scissors") == 0) {
+			printOutcome(9); 
+			result = 'p';
 		}
-		if (strcmp(cpuGuess, "lizard") == 0) {
-			printOutcome(2); return 'p';
+		else if (strcmp(cpuChoice, "Lizard") == 0) {
+			printOutcome(2); 
+			result = 'p';
 		}
-		if (strcmp(cpuGuess, "spock") == 0) {
-			printOutcome(8); return 'c';
+		else if (strcmp(cpuChoice, "Spock") == 0) {
+			printOutcome(8); 
+			result = 'c';
 		}		
 	}
-	if (strcmp(guess, "paper") == 0) {
-		if (strcmp(cpuGuess, "rock") == 0) {
-			printOutcome(1); return 'p';
+	else if (strcmp(playerChoice, "Paper") == 0) {
+		if (strcmp(cpuChoice, "Rock") == 0) {
+			printOutcome(1); 
+			result = 'p';
 		}
-		if (strcmp(cpuGuess, "scissors") == 0) {
-			printOutcome(0); return 'c';
+		else if (strcmp(cpuChoice, "Scissors") == 0) {
+			printOutcome(0); 
+			result = 'c';
 		}
-		if (strcmp(cpuGuess, "lizard") == 0) {
-			printOutcome(6); return 'c';
+		else if (strcmp(cpuChoice, "Lizard") == 0) {
+			printOutcome(6); 
+			result = 'c';
 		}
-		if (strcmp(cpuGuess, "spock") == 0) {
-			printOutcome(7); return 'p';
-		}
-	}
-	if (strcmp(guess, "scissors") == 0) {
-		if (strcmp(cpuGuess, "rock") == 0) {
-			printOutcome(9); return 'c';
-		}
-		if (strcmp(cpuGuess, "paper") == 0) {
-			printOutcome(0); return 'p';
-		}
-		if (strcmp(cpuGuess, "lizard") == 0) {
-			printOutcome(5); return 'p';
-		}
-		if (strcmp(cpuGuess, "spock") == 0) {
-			printOutcome(4); return 'c';
+		else if (strcmp(cpuChoice, "Spock") == 0) {
+			printOutcome(7); 
+			result = 'p';
 		}
 	}
-	if (strcmp(guess, "lizard") == 0) {
-		if (strcmp(cpuGuess, "rock") == 0) {
-			printOutcome(2); return 'c';
+	else if (strcmp(playerChoice, "Scissors") == 0) {
+		if (strcmp(cpuChoice, "Rock") == 0) {
+			printOutcome(9); 
+			result = 'c';
 		}
-		if (strcmp(cpuGuess, "paper") == 0) {
-			printOutcome(6); return 'p';
+		else if (strcmp(cpuChoice, "Paper") == 0) {
+			printOutcome(0); 
+			result = 'p';
 		}
-		if (strcmp(cpuGuess, "scissors") == 0) {
-			printOutcome(5); return 'c';
+		else if (strcmp(cpuChoice, "Lizard") == 0) {
+			printOutcome(5); 
+			result = 'p';
 		}
-		if (strcmp(cpuGuess, "spock") == 0) {
-			printOutcome(3); return 'p';
+		else if (strcmp(cpuChoice, "Spock") == 0) {
+			printOutcome(4); 
+			result = 'c';
+		}
+	}
+	else if (strcmp(playerChoice, "Lizard") == 0) {
+		if (strcmp(cpuChoice, "Rock") == 0) {
+			printOutcome(2); 
+			result = 'c';
+		}
+		else if (strcmp(cpuChoice, "Paper") == 0) {
+			printOutcome(6); 
+			result = 'p';
+		}
+		else if (strcmp(cpuChoice, "Scissors") == 0) {
+			printOutcome(5); 
+			result = 'c';
+		}
+		else if (strcmp(cpuChoice, "Spock") == 0) {
+			printOutcome(3); 
+			result = 'p';
 		}	
 	}
-	if (strcmp(guess, "spock") == 0) {
-		if (strcmp(cpuGuess, "rock") == 0) {
-			printOutcome(8); return 'p';
+	else if (strcmp(playerChoice, "Spock") == 0) {
+		if (strcmp(cpuChoice, "Rock") == 0) {
+			printOutcome(8); 
+			result = 'p';
 		}
-		if (strcmp(cpuGuess, "paper") == 0) {
-			printOutcome(7); return 'c';
+		else if (strcmp(cpuChoice, "Paper") == 0) {
+			printOutcome(7); 
+			result = 'c';
 		}
-		if (strcmp(cpuGuess, "scissors") == 0) {
-			printOutcome(4); return 'p';
+		else if (strcmp(cpuChoice, "Scissors") == 0) {
+			printOutcome(4); 
+			result = 'p';
 		}
-		if (strcmp(cpuGuess, "lizard") == 0) {
-			printOutcome(3); return 'c';
-		}	
+		else if (strcmp(cpuChoice, "Lizard") == 0) {
+			printOutcome(3); 
+			result = 'c';
+		}
 	}
+	return result;
 }
 
 void printOutcome(int outcome) {
 	switch (outcome) {
 		case 0:
-			printf("Scissors cut Paper, so ");
-			break;
+			printf("Scissors cut Paper, so "); break;
 		case 1:
-			printf("Paper covers Rock, so ");
-			break;
+			printf("Paper covers Rock, so "); break;
 		case 2:
-			printf("Rock crushes Lizard, so ");
-			break;
+			printf("Rock crushes Lizard, so "); break;
 		case 3:
-			printf("Lizard poisons Spock, so ");
-			break;
+			printf("Lizard poisons Spock, so "); break;
 		case 4:
-			printf("Spock smashes Scissors, so ");
-			break;
+			printf("Spock smashes Scissors, so "); break;
 		case 5:
-			printf("Scissors decapitates Lizard, so ");
-			break;
+			printf("Scissors decapitate Lizard, so "); break;
 		case 6:
-			printf("Lizard eats Paper, so ");
-			break;
+			printf("Lizard eats Paper, so "); break;
 		case 7:
-			printf("Paper disproves Spock, so ");
-			break;
+			printf("Paper disproves Spock, so "); break;
 		case 8:
-			printf("Spock vaporizes Rock, so ");
-			break;
+			printf("Spock vaporizes Rock, so "); break;
 		case 9:
-			printf("Rock crushes Scissors, so ");
-			break;
+			printf("Rock crushes Scissors, so "); break;
 	}
 }
 
@@ -236,19 +245,72 @@ void printScore(int playerWins, int cpuWins)
 	printf("You: %d\tCPU: %d\n", playerWins, cpuWins);
 }
 
+void quit(int requireConfirm)
+{
+	if (requireConfirm)
+	{
+		printf("Really quit? [y/n] ");
+		if (parseInput(0) == 'Y')
+			exit(0);
+	}
+	else
+		exit(0);
+}
 
 void showAbout()
 {
-	printf("About text will go here.\n");
-	do {
-		printf("Press Enter to continue playing...");
-	} while(getchar() != '\n');
+	printf("\nRock Paper Scissors Lizard Spock was popularized by The Big Bang Theory "
+			"(the TV show, not the theory).\n"
+			"You can read more about it here: " 
+			"http://bigbangtheory.wikia.com/wiki/Rock_Paper_Scissors_Lizard_Spock\n"
+			"This program was created by Joshua Scott, "
+			"for a System Software course at university.\n"
+			"You can view more of his work at https://github.com/jscott313\n");
 }
 
 void showHelp()
 {
-	printf("Help text will go here.\n");
-	do {
-		printf("Press Enter to continue playing...");
-	} while(getchar() != '\n');
+	printf("\nBest of three rounds. Rules are as follows:\n"
+			"\tScissors cut Paper\n"
+			"\tPaper covers Rock\n"
+			"\tRock crushes Lizard\n"
+			"\tLizard poisons Spock\n"
+			"\tSpock smashes Scissors\n"
+			"\tScissors decapitate Lizard\n"
+			"\tLizard eats Paper\n"
+			"\tPaper disproves Spock\n"
+			"\tSpock vaporizes Rock\n"
+			"\tRock crushes Scissors\n"
+			"Simple, right?\n");
+}
+
+/**
+ * This helper function was implemented due to problems with getchar(), which kept reading the newline as another input.
+ * It could be fixed by calling getchar() again, but it's hacky. This function is cleaner.
+ * Since all inputs only require one character, returning the first char of whatever the user typed is sufficient.
+ */
+char parseInput(int confirmOnQuit)
+{
+	char* input = malloc(10 * sizeof(char));
+
+	if (input)
+		fgets(input, 10, stdin);
+	else {
+		printf("Error at parseInput(), exiting...\n");
+		exit(-1);
+	}
+
+	char response = toupper(input[0]);
+	free(input);
+
+	switch (response) {
+		case 'A':
+			showAbout(); break;
+		case 'H':
+			showHelp(); break;
+		case 'Q':
+			quit(confirmOnQuit); break;
+	}
+
+	return response;
 }
