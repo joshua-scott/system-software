@@ -1,3 +1,10 @@
+/**
+ * Name: 		Exercise9, ex9.c
+ * Author: 		Joshua Scott
+ * Description:
+ * 		A command line game of Rock Paper Scissors Spock.
+ */
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +40,7 @@ void play()
 	int playerWins = 0,
 		cpuWins = 0;
 
-	// play rounds until there's a winner
+	/* Play rounds until there's a winner */
 	while (playerWins < 2 && cpuWins < 2) {
 		char roundResult = initRound();
 
