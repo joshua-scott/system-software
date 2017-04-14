@@ -2,7 +2,7 @@
  * Name: 		Exercise9, ex9.c
  * Author: 		Joshua Scott
  * Description:
- * 		A command line game of Rock Paper Scissors Spock.
+ * 		A command line game of Rock Paper Scissors Lizard Spock.
  */
 
 #include <ctype.h>
